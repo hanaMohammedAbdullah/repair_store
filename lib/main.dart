@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         Locale("en", "US"),
         Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
       ],
-      home: LoginScreen(),
+      home: MyHomePage(),
     );
   }
 }

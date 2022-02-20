@@ -52,11 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      //
-      //
-      //
-      //
-      //
       body: SafeArea(
         child: Transform.translate(
           offset: Offset(_x, 0),
