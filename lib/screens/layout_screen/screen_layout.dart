@@ -1,18 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:test_stack_listview_transform/screens/favorite.dart';
 import 'package:test_stack_listview_transform/screens/notifications.dart';
 import 'package:test_stack_listview_transform/screens/rearby.dart';
 import 'package:test_stack_listview_transform/screens/screen_home/home.dart';
+import '../../models/Icon_model.dart';
 import 'customdrawer.dart';
 
-class CustomIcon {
-  late int id;
-  String label;
-  late IconData type;
-  CustomIcon(this.id, this.label, this.type);
-}
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -21,9 +17,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color get _iconColor => Colors.white;
-  double get _iconSize => 33;
-  Color get _themeColor => Color(0xFF0E1558);
+  final Color _iconColor = Colors.white;
+  final double  _iconSize = 33;
+  final Color  _themeColor = Color(0xFF0E1558);
 
   /// for changing layoout body and bottom navigation bar state
   var _current_index = 0;
@@ -45,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   double _x = 0;
-  double screenWidth = 0.0;
-  double screenHeight = 0.0;
+  late double screenWidth ;
+  late double screenHeight ;
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -56,8 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Transform.translate(
           offset: Offset(_x, 0),
           child: Container(
-            height: screenHeight,
-            width: screenWidth,
             child: Stack(
               clipBehavior: Clip.none,
               children: [
@@ -67,11 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: screenHeight * (8 / 100),
                     width: screenWidth,
                     decoration: BoxDecoration(
-                      color: Color(0xFF0E1558),
+                      color: _themeColor,
                       borderRadius:
                           BorderRadius.vertical(bottom: Radius.circular(15)),
                     ),
-                    child: getTapBar(),
+                    child: getUpBar(),
                   ),
                 ),
                 Positioned(
@@ -79,7 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     height: screenHeight * (84 / 100),
                     width: screenWidth,
-                    color: Colors.white,
                     child: screen[_current_index],
                   ),
                 ),
@@ -112,16 +105,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget getTapBar() {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+  Widget getUpBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+      children: [
       IconButton(
         onPressed: () {
-          if (_x == 0) {
-            _x = screenWidth / 2;
+          
+          setState(() {
+            if (_x == 0) {
+            _x = (screenWidth / 2);
           } else {
             _x = 0;
           }
-          setState(() {});
+          });
         },
         icon: Icon(
           Icons.sort,
@@ -151,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget getBottomBar() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
-      height: 60,
+      height: screenHeight * (8 / 100),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
@@ -159,16 +156,15 @@ class _MyHomePageState extends State<MyHomePage> {
         color: _themeColor,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: icons.map((icon) {
           return Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               (_current_index == icon.id)
                   ? popedIcon(icon)
                   : bottomBarIcon(icon),
-              bottombottomBarIconlabel(icon.label),
+              bottomBarIconlabel(icon.label),
             ],
           );
         }).toList(),
@@ -176,9 +172,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Padding bottombottomBarIconlabel(String text) {
+  Padding bottomBarIconlabel(String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 3),
+      padding: const EdgeInsets.only(bottom: 2),
       child: Text(text, style: TextStyle(color: _iconColor)),
     );
   }
@@ -209,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Positioned(
-          bottom: 20,
+          bottom: 10,
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle, // be able to add circular border

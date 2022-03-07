@@ -3,10 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:test_stack_listview_transform/models/Craftsman_model.dart';
-import 'package:test_stack_listview_transform/screen_layout.dart';
+import 'package:test_stack_listview_transform/screens/layout_screen/screen_layout.dart';
 import 'package:test_stack_listview_transform/screens/profile.dart';
 
-import 'login_design.dart';
 
 void main() {
   runApp(const MyApp());

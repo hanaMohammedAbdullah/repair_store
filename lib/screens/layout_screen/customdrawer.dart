@@ -3,34 +3,37 @@
 import 'package:flutter/material.dart';
 import 'package:test_stack_listview_transform/icons/snap_chat_icons.dart';
 
-import 'icons/instagram_icons.dart';
+import '../../icons/instagram_icons.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  var screenWidth = MediaQuery.of(context).size.width;
+  var  screenHeight = MediaQuery.of(context).size.height;
+  
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
           color: Color(0xFF0E1558),
           padding: EdgeInsets.all(10),
-          height: MediaQuery.of(context).size.height * (22 / 100),
-          width: MediaQuery.of(context).size.width / 2,
+          height:  screenHeight * (22 / 100),
+          width: screenWidth / 2,
           child: getHeader(),
         ),
         Container(
           color: Colors.white,
-          height: MediaQuery.of(context).size.height * (23 / 100),
-          width: MediaQuery.of(context).size.width / 2,
+          height: screenHeight * (23 / 100),
+          width: screenWidth / 2,
           child: getBody(),
         ),
         Container(
           alignment: Alignment.bottomCenter,
           color: Colors.white,
-          height: MediaQuery.of(context).size.height * (47 / 100),
-          width: MediaQuery.of(context).size.width / 2,
+          height: screenHeight * (47 / 100),
+          width: screenWidth / 2,
           child: getFooter(),
         ),
       ],
@@ -139,7 +142,7 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  getFooter() {
+  Widget getFooter() {
     Color iconColor = Color(0xFF10185F);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -154,7 +157,7 @@ class CustomDrawer extends StatelessWidget {
           ),
         ),
         CircleAvatar(
-          radius: 27,
+          radius: 25,
           backgroundColor: iconColor,
           child: Icon(
             Instagram.instagram_1,

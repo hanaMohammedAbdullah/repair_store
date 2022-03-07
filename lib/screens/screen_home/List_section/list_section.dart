@@ -74,14 +74,12 @@ class ListSection extends StatelessWidget {
     }
     return Text(
       title,
-      style: sectionTitleStyle(),
+      style:  TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  ),
     );
   }
 }
 
-TextStyle sectionTitleStyle() {
-  return const TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-  );
-}
+

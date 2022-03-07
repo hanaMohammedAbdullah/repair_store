@@ -6,7 +6,7 @@ import 'package:test_stack_listview_transform/icons/right_sign_icons.dart';
 import 'package:test_stack_listview_transform/icons/snap_chat_icons.dart';
 import 'package:test_stack_listview_transform/models/Craftsman_model.dart';
 
-import '../screen_layout.dart';
+import 'layout_screen/screen_layout.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
@@ -22,8 +22,8 @@ class _ProfileState extends State<Profile> {
   Color _themeColor = Color(0xFF0E1558);
   int _starIndex = -1;
 
-  double width = 0.0;
-  double height = 0.0;
+  late double width ;
+  late double height ;
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -54,7 +54,6 @@ class _ProfileState extends State<Profile> {
                       child: Image.asset(
                         'assets/images/map.JPG',
                         fit: BoxFit.fill,
-                        width: width,
                         height: height * (25 / 100),
                       ),
                     ),
@@ -76,9 +75,7 @@ class _ProfileState extends State<Profile> {
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
-                          widget.craftsman.image,
-                          height: 150,
-                          width: 150,
+                          widget.craftsman.image,                         
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -89,12 +86,7 @@ class _ProfileState extends State<Profile> {
                       child: Container(
                         child: IconButton(
                           onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyHomePage()),
-                            );
+                            Navigator.pop(context);                           
                           },
                           icon: Icon(
                             Icons.arrow_back,
@@ -110,7 +102,6 @@ class _ProfileState extends State<Profile> {
                       child: Container(
                         height: 26,
                         width: 55,
-                        alignment: Alignment.topRight,
                         decoration: BoxDecoration(
                             color: _themeColor,
                             borderRadius: BorderRadius.horizontal(
@@ -172,11 +163,6 @@ class _ProfileState extends State<Profile> {
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: getCommunicationIcon(),
-              ),
-              Divider(
-                color: Colors.white,
-                thickness: 0,
-                height: 5,
               ),
             ],
           ),
@@ -251,26 +237,20 @@ class _ProfileState extends State<Profile> {
         Container(
           height: 120,
           width: width,
-          child: ListView.builder(
+          child: ListView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () {},
-              child: Card(
+            children: widget.craftsman.album.map((e) => Card(
                 clipBehavior: Clip.antiAlias,
                 elevation: 6,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(23), // if you need this
                 ),
                 child: Image.asset(
-                  widget.craftsman.album[index],
+                  e,
                   fit: BoxFit.fill,
-                  // height: 100,
-                  // width: 100,
                 ),
-              ),
-            ),
-            itemCount: widget.craftsman.album.length,
+              ),).toList(),
           ),
         ),
       ],
