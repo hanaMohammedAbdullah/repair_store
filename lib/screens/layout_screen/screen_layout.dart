@@ -17,6 +17,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  /// some constant value that we use mostly
+
   final Color _iconColor = Colors.white;
   final double  _iconSize = 33;
   final Color  _themeColor = Color(0xFF0E1558);
@@ -27,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///
 
   List<Widget> screen = [
+    /// the screen we have 
     Home(),
     Favorite(),
     NearBy(),
@@ -34,14 +38,15 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   List<CustomIcon> icons = [
+    // the bottom action to adding home huch you want or delete it 
     CustomIcon(0, "home", Icons.home),
     CustomIcon(1, "favorite", Icons.favorite),
     CustomIcon(2, "nearby", Icons.blur_circular),
     CustomIcon(3, "notification", Icons.notification_add_outlined),
   ];
 
-  double _x = 0;
-  late double screenWidth ;
+  double _x = 0; // this is the value that we will change 
+  late double screenWidth ;// late is a build in function used for flutter use if you create a var and want to assign value after for null safity
   late double screenHeight ;
   @override
   Widget build(BuildContext context) {
